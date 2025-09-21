@@ -35,3 +35,34 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+hs_err_pid*
+
+# Gradle / Build
+.gradle/
+build/
+out/
+
+# IntelliJ / JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# H2 file DB (파일 DB 쓸 때만 생성)
+*.mv.db
+*.trace.db
+
+# Secrets (향후 대비)
+.env
+application-*.secrets.yml
+application-*.properties.local
+application-*.yml.local
+
+# Node (프론트 폴더 생기면)
+node_modules/
