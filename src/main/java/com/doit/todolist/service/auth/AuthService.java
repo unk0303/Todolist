@@ -24,8 +24,13 @@ public class AuthService {
         if (userRepository.existsByUsername(username)) {
             throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
         }
+
+        // 입력 비밀번호를 암호화
         String encoded = passwordEncoder.encode(rawPassword);
+
+        // 암호화된 비밀번호로 User 엔티티 생성
         User user = new User(username, encoded);
+
         return userRepository.save(user);
     }
 }
