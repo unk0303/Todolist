@@ -9,8 +9,6 @@ import jakarta.validation.Valid;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,26 +23,19 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
+    // 회원가입
     @PostMapping("/signup")
     public UserResponse signup(@Valid @RequestBody SignUpRequest req) {
         User saved = authService.signup(req.username, req.password);
         return new UserResponse(saved.getId(), saved.getUsername());
     }
 
+    // 로그인
     @PostMapping("/login")
     public String login(@Valid @RequestBody LoginRequest req) {
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.username, req.password));
-        // 세션이 생성되고, 이후 요청에서 인증 상태가 유지됨
+                new UsernamePasswordAuthenticationToken(req.username, req.password)
+        );
         return "login ok: " + auth.getName();
-    }
-}
-
-@RestController
-@RequestMapping("/api/users")
-class UserQueryController {
-    @GetMapping("/me")
-    public UserResponse me(@AuthenticationPrincipal UserDetails user) {
-        return new UserResponse(null, user.getUsername());
     }
 }

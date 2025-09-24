@@ -1,10 +1,12 @@
-// LoginRequest는 로그인 요청을 받을 때 클라이언트가 보낸 데이터(username, password)를 담는 DTO
-
 package com.doit.todolist.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;  // ⬅️ 이 줄 추가해야 함
 
 public class LoginRequest {
-    @NotBlank public String username;
-    @NotBlank public String password;
+    @NotBlank @Size(min = 3, max = 30)
+    public String username;
+
+    @NotBlank @Size(min = 4, max = 60)
+    public String password;
 }

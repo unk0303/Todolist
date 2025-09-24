@@ -7,6 +7,7 @@ package com.doit.todolist.service.auth;
 
 import com.doit.todolist.domain.user.User;
 import com.doit.todolist.repository.user.UserRepository;
+import com.doit.todolist.exception.UsernameAlreadyExistsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,8 @@ public class AuthService {
 
     public User signup(String username, String rawPassword) {
         if (userRepository.existsByUsername(username)) {
-            throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+            // IllegalArgumentException → UsernameAlreadyExistsException 으로 교체
+            throw new UsernameAlreadyExistsException("이미 존재하는 아이디입니다.");
         }
 
         // 입력 비밀번호를 암호화
