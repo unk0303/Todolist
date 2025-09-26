@@ -1,0 +1,36 @@
+server:
+  port: 8080  # 서버 실행 포트 (http://localhost:8080)
+
+# 개발 단계에서 편하게 DB 확인 & 테이블 자동 생성하려는 설정
+# 실제 배포 환경에서는 ddl-auto: update 대신 validate 또는 none을,
+# DB도 MySQL/PostgreSQL 같은 외부 DB를 쓴다.
+
+spring:
+  datasource:  # 데이터베이스 연결 설정
+    url: jdbc:h2:mem:todo;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    # H2 인메모리 DB 사용, MySQL 모드 실행
+    # DB_CLOSE_DELAY=-1  → 애플리케이션 실행 중 DB 유지
+    # DB_CLOSE_ON_EXIT=FALSE → 종료 시 DB 자동 삭제 방지
+    username: sa      # H2 기본 사용자 이름
+    password:         # H2 기본은 비밀번호 없음
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      # 개발 단계 전용: 엔티티(Entity) 구조에 맞춰
+      # DB 테이블을 자동 생성/업데이트
+    show-sql: true      # 콘솔에 실행되는 SQL 쿼리 출력
+    properties:
+      hibernate:
+        format_sql: true  # SQL 쿼리를 보기 좋게 정렬
+    open-in-view: false   # 뷰 렌더링 단계에서 DB 세션 닫음 (권장)
+
+  h2:
+    console:
+      enabled: true      # H2 웹 콘솔 사용 가능
+      path: /h2-console  # 접속 URL: http://localhost:8080/h2-console
+
+logging:
+  level:
+    # Spring Security 경고 로그 억제 (AuthenticationManager 관련 WARN 안 보이게)
+    org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer: ERROR
