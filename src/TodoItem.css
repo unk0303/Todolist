@@ -1,0 +1,56 @@
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-item:hover {
+    background-color: #f1f1f1;
+}
+
+.todo-text {
+    flex-grow: 1;
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.edit-btn {
+    background-color: #0275d8;
+}
+
+.delete-btn {
+    background-color: #d9534f;
+}
+
+.edit-btn:hover {
+    background-color: #025aa5;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
