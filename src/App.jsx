@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './Login.jsx';
-import Main from './Main.jsx';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-const App = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+// 각 페이지 import
+import LoginPage from "./LoginPage.jsx";
+import SignUpPage from "./SignUpPage.jsx";
+import StitchDesign from "./StitchDesign.jsx";
+import CalendarPage from "./CalendarPage.jsx";
 
-    const handleLogin = () => {
-        setIsLoggedIn(true);
-        // 실제 프로젝트에서는 로그인 성공 시 토큰을 저장하는 로직이 추가됩니다.
-    };
-
-    const handleLogout = () => {
-        setIsLoggedIn(false);
-        // 실제 프로젝트에서는 저장된 토큰을 삭제하는 로직이 추가됩니다.
-    };
-
+function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/login" element={isLoggedIn ? <Navigate to="/" /> : <Login onLogin={handleLogin} />} />
-                <Route path="/" element={isLoggedIn ? <Main onLogout={handleLogout} /> : <Navigate to="/login" />} />
+                {/* 기본 루트("/")를 로그인 페이지로 설정 */}
+                <Route path="/" element={<LoginPage />} />
+
+                {/* 회원가입 페이지 */}
+                <Route path="/signup" element={<SignUpPage />} />
+
+                {/* 스티치 디자인 페이지 */}
+                <Route path="/stitch" element={<StitchDesign />} />
+
+                {/* 캘린더 페이지 */}
+                <Route path="/calendar" element={<CalendarPage />} />
             </Routes>
         </Router>
     );
-};
+}
 
 export default App;

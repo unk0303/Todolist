@@ -1,20 +1,13 @@
-import React from 'react';
-import Sidebar from './Sidebar.jsx';
-import TodoList from './TodoList.jsx';
-import Header from './Header.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+// import './index.css'; // Tailwind만 쓸 거면 필요 없음
 
-const Main = ({ onLogout }) => {
-    return (
-        <div className="main-container">
-            <Header onLogout={onLogout} />
-            <div className="content-area">
-                <Sidebar />
-                <div className="todo-content">
-                    <TodoList />
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default Main;
+ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </React.StrictMode>
+);
